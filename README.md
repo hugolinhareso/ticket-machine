@@ -1,4 +1,13 @@
-Source-Code-Inspection [![Build Status](https://travis-ci.org/Prof-Calebe/Source-Code-Inspection.svg?branch=master)](https://travis-ci.org/Prof-Calebe/Source-Code-Inspection)
-======================
+# ticket-machine
 
-Link para o Travis-CI: https://travis-ci.org/Prof-Calebe/Source-Code-Inspection
+Esse repositório é a correção de um programa utilizado em uma máquina de venda de bilhetes.
+Inicialmente, há no programa diversos erros de lógica e de não seguimento dos requisitos do projeto.
+
+Repositório forkado do [Source-Code-Inspection](https://github.com/Prof-Calebe/Source-Code-Inspection) criado pelo [Prof. Calebe de Paula Bianchini](https://github.com/Prof-Calebe).
+
+
+## Integrantes
+
+[Hugo Linhares Oliveira](https://github.com/hugolinhareso)
+
+[João Pedro Rosa Cezarino](https://github.com/akajhon)
