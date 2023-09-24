@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img alt="Logo" align="center" src ="https://github.com/hugolinhareso/ticket-machine/tree/master/resources/ticket-machine.png" width="150" height="190"></img>
+  <img alt="Logo" align="center" src ="https://github.com/hugolinhareso/ticket-machine/blob/master/resources/docs/images/ticket-machine.png" width="160" height="190"></img>
 <p>
 
 <!-- INTRODUCAO -->
