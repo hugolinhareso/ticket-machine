@@ -2,7 +2,10 @@ package br.calebe.ticketmachine.core;
 
 import br.calebe.ticketmachine.exception.PapelMoedaInvalidaException;
 import br.calebe.ticketmachine.exception.SaldoInsuficienteException;
+
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -10,20 +13,21 @@ import java.util.Iterator;
  */
 public class TicketMachine {
 
-    protected int valor;
+    protected int precoDoBilhete;
     protected int saldo;
     protected int[] papelMoeda = { 2, 5, 10, 20, 50, 100 };
 
-    public TicketMachine(int valor) {
-        this.valor = valor;
+    public TicketMachine(int precoDoBilhete) {
+        this.precoDoBilhete = precoDoBilhete;
         this.saldo = 0;
     }
 
     public void inserir(int quantia) throws PapelMoedaInvalidaException {
         boolean achou = false;
-        for (int i = 0; i < papelMoeda.length && !achou; i++) {
-            if (papelMoeda[1] == quantia) {
+        for (int i = 0; i < papelMoeda.length; i++) {
+            if (papelMoeda[i] == quantia) {
                 achou = true;
+                break; // Sair do loop assim que encontrar a moeda
             }
         }
         if (!achou) {
@@ -37,11 +41,24 @@ public class TicketMachine {
     }
 
     public Iterator<Integer> getTroco() {
-        return null;
+        int troco = saldo - precoDoBilhete;
+        if (troco < 0) {
+            throw new IllegalStateException("Não há troco a ser fornecido.");
+        }
+
+        List<Integer> notasDeTroco = new ArrayList<>();
+        for (int i = papelMoeda.length - 1; i >= 0; i--) {
+            while (troco >= papelMoeda[i]) {
+                notasDeTroco.add(papelMoeda[i]);
+                troco -= papelMoeda[i];
+            }
+        }
+
+        return notasDeTroco.iterator();
     }
 
     public String imprimir() throws SaldoInsuficienteException {
-        if (saldo < valor) {
+        if (saldo < precoDoBilhete) {
             throw new SaldoInsuficienteException();
         }
         String result = "*****************\n";
