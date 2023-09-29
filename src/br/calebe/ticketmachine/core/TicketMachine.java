@@ -40,7 +40,7 @@ public class TicketMachine {
     }
 
     public Iterator<Integer> getTroco() {
-        int troco = saldo - valor;
+        int troco = saldo - precoDoBilhete;
         if (troco < 0) {
             throw new IllegalStateException("Não há troco a ser fornecido.");
         }
