@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class TicketMachine {
 
-    protected int valor;
+    protected int precoDoBilhete;
     protected int saldo;
     protected int[] papelMoeda = { 2, 5, 10, 20, 50, 100 };
 
-    public TicketMachine(int valor) {
-        this.valor = valor;
+    public TicketMachine(int precoDoBilhete) {
+        this.precoDoBilhete = precoDoBilhete;
         this.saldo = 0;
     }
 
@@ -57,7 +57,7 @@ public class TicketMachine {
     }
 
     public String imprimir() throws SaldoInsuficienteException {
-        if (saldo < valor) {
+        if (saldo < precoDoBilhete) {
             throw new SaldoInsuficienteException();
         }
         String result = "*****************\n";
