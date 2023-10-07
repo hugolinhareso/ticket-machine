@@ -25,9 +25,11 @@ jobs:
             exit 1
         fi
 
+    - name: Listar arquivos no diretório atual
+      run: ls -R
+
     - name: Executar Testes com JUnit
       run: |
-        ls .:/lib
         java -jar junit-platform-console-standalone-1.7.3.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
 
         test_exit_code=$?
