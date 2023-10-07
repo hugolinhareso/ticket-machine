@@ -30,7 +30,8 @@ jobs:
 
     - name: Executar Testes com JUnit
       run: |
-        java -jar junit-platform-console-standalone-*.jar execute
+        wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
+        java -jar junit-platform-console-standalone-1.9.3.jar execute
 
         test_exit_code=$?
 
