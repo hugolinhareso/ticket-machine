@@ -27,7 +27,7 @@ jobs:
 
     - name: Executar Testes com JUnit
       run: |
-        java -cp .:lib/junit-platform-console-standalone-1.7.3.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
+        java -jar junit-platform-console-standalone-1.7.3.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
 
         test_exit_code=$?
 
