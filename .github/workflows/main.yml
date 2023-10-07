@@ -1,9 +1,6 @@
 name: Build, Test, and Run Java
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   build:
