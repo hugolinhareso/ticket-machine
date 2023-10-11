@@ -1,0 +1,42 @@
+name: Build, Test, and Run Java
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v2
+
+    - name: Configurar JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
+        distribution: 'temurin'
+
+    - name: Compilar
+      run: |
+        javac -d . src/br/calebe/ticketmachine/**/*.java
+
+        if [ $? -ne 0 ]; then
+            echo "Erro na compilação."
+            exit 1
+        fi
+
+    - name: Baixar JUnit
+      run: wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
+
+    - name: Executar Testes com JUnit
+      run: |
+        java -cp junit-platform-console-standalone-1.9.3.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
+
+        test_exit_code=$?
+
+        if [ $test_exit_code -eq 0 ]; then
+            echo "Testes bem-sucedidos."
+        else
+            echo "Testes falharam."
+            exit 1
+        fi
