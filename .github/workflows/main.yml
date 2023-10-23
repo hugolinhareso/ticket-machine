@@ -1,42 +1,30 @@
-name: Build, Test, and Run Java
+name: Java CI with Maven
 
-on: push
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Configurar JDK 11
-      uses: actions/setup-java@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
       with:
-        java-version: 11
+        java-version: '17'
         distribution: 'temurin'
+        cache: maven
 
-    - name: Compilar
-      run: |
-        javac -d . src/br/calebe/ticketmachine/**/*.java
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
 
-        if [ $? -ne 0 ]; then
-            echo "Erro na compilação."
-            exit 1
-        fi
+    - name: Run Tests with Maven
+      run: mvn test --file pom.xml
 
-    - name: Baixar JUnit
-      run: wget https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.9.3/junit-platform-console-standalone-1.9.3.jar
-
-    - name: Executar Testes com JUnit
-      run: |
-        java -cp junit-platform-console-standalone-1.9.3.jar org.junit.platform.console.ConsoleLauncher --scan-classpath
-
-        test_exit_code=$?
-
-        if [ $test_exit_code -eq 0 ]; then
-            echo "Testes bem-sucedidos."
-        else
-            echo "Testes falharam."
-            exit 1
-        fi
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
